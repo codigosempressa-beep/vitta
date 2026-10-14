@@ -1,0 +1,6 @@
+const menu=document.querySelector('.menu-button'),nav=document.querySelector('.nav');
+function closeMenu(){if(!menu)return;nav.classList.remove('nav-open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Abrir menu');document.body.style.overflow='';}
+menu?.addEventListener('click',()=>{const open=!nav.classList.contains('nav-open');nav.classList.toggle('nav-open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');document.body.style.overflow=open?'hidden':'';});
+nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.querySelectorAll('.faq-item button').forEach(b=>b.addEventListener('click',()=>{const open=b.getAttribute('aria-expanded')!=='true';document.querySelectorAll('.faq-item').forEach(item=>{item.classList.remove('open');item.querySelector('button').setAttribute('aria-expanded','false');item.querySelector('b').textContent='+';item.querySelector('.faq-answer').hidden=true;});if(open){b.parentElement.classList.add('open');b.setAttribute('aria-expanded','true');b.querySelector('b').textContent='−';b.parentElement.querySelector('.faq-answer').hidden=false;}}));
+document.querySelector('.compare-wrap input')?.addEventListener('input',e=>e.target.closest('.compare-wrap').style.setProperty('--position',e.target.value+'%'));
